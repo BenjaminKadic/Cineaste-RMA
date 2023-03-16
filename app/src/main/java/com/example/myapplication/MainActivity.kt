@@ -2,29 +2,29 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var listView: ListView
+    private lateinit var editText: EditText
+    private lateinit var button: Button
+    private val  listaVrijednosti = arrayListOf<String>()
+    private lateinit var adapter : MyArrayAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Dohvatit cemo referencu na view button-a preko id-a
-        val button = findViewById<Button>(R.id.button1);
-        //Definisat cemo akciju u slucaju klik akcije
+        button = findViewById(R.id.button1);
+        editText = findViewById(R.id.editText1)
+        listView = findViewById(R.id.listView1)
+        adapter = MyArrayAdapter(this, R.layout.element_list, listaVrijednosti)
+        listView.adapter=adapter
         button.setOnClickListener {
-            showMessage()
+            addToList()
         }
     }
-
-    private fun showMessage() {
-        // Pronaci cemo nas edit text i text view na osnovu id-a
-        val editText = findViewById<EditText>(R.id.editText1)
-        val textView = findViewById<TextView>(R.id.textView1)
-        // Tekst cemo prebaciti u varijablu
-        val message = editText.text.toString()
-        // Postavimo tekst
-        textView.text = message
+    private fun addToList() {
+        listaVrijednosti.add(0,editText.text.toString())
+        adapter.notifyDataSetChanged();
+        editText.setText("");
     }
 }
