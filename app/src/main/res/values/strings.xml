@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="favorite">Favorite movies</string>
+    <string name="search">Search</string>
+    <string name="recent">Upcoming movies</string>
+    <string name="visit">Visit</string>
+    <string name="offline">Offline</string>
 </resources>
