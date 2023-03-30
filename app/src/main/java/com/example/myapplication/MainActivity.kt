@@ -5,15 +5,11 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
-import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recentMovies: RecyclerView
     private lateinit var recentMoviesAdapter: MovieListAdapter
     private var recentMoviesList =  getRecentMovies()
-
-    private var isBosnian: Boolean = false
 
     class NetworkChangeReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -85,29 +79,6 @@ class MainActivity : AppCompatActivity() {
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             searchText.setText(it)
         }
-    }
-
-    fun switchLanguage(view: View) {
-        val defaultLocale = Locale.getDefault()
-        val androidStudioLocale = Locale.US
-        val newLocale = when (Locale.getDefault()) {
-            Locale("bs", "BA") -> androidStudioLocale
-            else -> Locale("bs", "BA")
-        }
-        Locale.setDefault(newLocale)
-        val config = Configuration()
-        config.locale = newLocale
-        resources.updateConfiguration(config, resources.displayMetrics)
-        recreate()
-    }
-
-    private fun switchTheme() {
-        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        when (currentNightMode) {
-            Configuration.UI_MODE_NIGHT_NO -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            Configuration.UI_MODE_NIGHT_YES -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        recreate()
     }
 
 }

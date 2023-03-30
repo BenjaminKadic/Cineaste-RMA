@@ -5,9 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -60,21 +58,11 @@ class MovieDetailActivity : AppCompatActivity() {
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }
-
-    override fun onBackPressed() {
-        // Navigate back to the previous activity
-        super.onBackPressed()
-    }
-
     private fun populateDetails() {
         title.text=movie.title
         releaseDate.text=movie.releaseDate
         genre.text=movie.genre
-        //website.text=movie.homepage
+        website.text=movie.homepage
         overview.text=movie.overview
         val context: Context = poster.context
         var id: Int = context.resources
@@ -99,7 +87,8 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun showWebsiteOnTitleClick() {
+
+    fun showWebsiteOnTitleClick() {
         val query = "${movie.title} trailer"
         val uri = Uri.parse("https://www.google.com/search?q=${query.replace(" ", "+")}")
         val webIntent = Intent(Intent.ACTION_VIEW, uri)
@@ -109,4 +98,5 @@ class MovieDetailActivity : AppCompatActivity() {
             // Define the action to take if there is no activity that can handle the intent
         }
     }
+
 }
