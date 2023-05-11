@@ -27,5 +27,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        Intent(this, LatestMovieService::class.java).also {
+            startForegroundService(it)
+            return
+        }
     }
 }

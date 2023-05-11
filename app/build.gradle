@@ -22,6 +22,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            buildConfigField 'String', "TMDB_API_KEY", "\"5a4c3f33830808ee64aacfcb923b08ce\""
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
