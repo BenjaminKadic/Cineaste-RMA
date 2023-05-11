@@ -16,7 +16,7 @@ sealed class Result<out R> {
 
 object MovieRepository {
 
-    private const val tmdb_api_key : String = "a1ae4918896c5e634c61d597d471e7fd"
+    private const val tmdb_api_key : String = "5a4c3f33830808ee64aacfcb923b08ce"
 
     suspend fun searchRequest(
         query: String
@@ -42,7 +42,7 @@ object MovieRepository {
                         if (i == 5) break
                     }
                 }
-                Result.Success(movies);
+                Result.Success(movies)
             }
             catch (e: MalformedURLException) {
                 return@withContext Result.Error(Exception("Cannot open HttpURLConnection"))
