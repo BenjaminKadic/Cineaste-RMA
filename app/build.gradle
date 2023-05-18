@@ -43,6 +43,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:+"
+    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test:core-ktx:1.5.0'
@@ -53,5 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:+'
     implementation 'com.github.bumptech.glide:glide:+'
     annotationProcessor 'com.github.bumptech.glide:compiler:+'
+    implementation 'com.squareup.retrofit2:retrofit:+'
+    implementation 'com.squareup.retrofit2:converter-gson:+'
 
 }

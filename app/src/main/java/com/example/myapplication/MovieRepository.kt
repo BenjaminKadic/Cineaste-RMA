@@ -38,7 +38,7 @@ object MovieRepository {
                         val posterPath = movie.getString("poster_path")
                         val overview = movie.getString("overview")
                         val releaseDate = movie.getString("release_date")
-                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null, null, posterPath, movie.getString("backdrop_path")))
+                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null, posterPath, movie.getString("backdrop_path")))
                         if (i == 5) break
                     }
                 }
@@ -52,6 +52,14 @@ object MovieRepository {
                 return@withContext Result.Error(Exception("Cannot parse JSON"))
             }
 
+        }
+    }
+    suspend fun getUpcomingMovies(
+    ) : GetMoviesResponse?{
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getUpcomingMovies()
+            val responseBody = response.body()
+            return@withContext responseBody
         }
     }
 }
