@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONException
@@ -60,6 +61,25 @@ object MovieRepository {
             var response = ApiAdapter.retrofit.getUpcomingMovies()
             val responseBody = response.body()
             return@withContext responseBody
+        }
+    }
+    suspend fun getFavoriteMovies(context: Context) : List<Movie> {
+        return withContext(Dispatchers.IO) {
+            var db = AppDatabase.getInstance(context)
+            var movies = db!!.movieDao().getAll()
+            return@withContext movies
+        }
+    }
+    suspend fun writeFavorite(context: Context,movie:Movie) : String?{
+        return withContext(Dispatchers.IO) {
+            try{
+                var db = AppDatabase.getInstance(context)
+                db!!.movieDao().insertAll(movie)
+                return@withContext "success"
+            }
+            catch(error:Exception){
+                return@withContext null
+            }
         }
     }
 }
