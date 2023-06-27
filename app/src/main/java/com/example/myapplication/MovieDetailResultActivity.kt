@@ -69,7 +69,7 @@ class MovieDetailResultActivity : AppCompatActivity() {
             .placeholder(R.drawable.picture1)
             .error(id)
             .fallback(id)
-            .into(poster)
+            .into(poster);
         var backdropContext: Context = backdrop.getContext()
         Glide.with(backdropContext)
             .load(backdropPath + movie.backdropPath)

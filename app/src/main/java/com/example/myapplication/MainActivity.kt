@@ -1,30 +1,35 @@
 package com.example.myapplication
-
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Dohvatit cemo referencu na view button-a preko id-a
-        val button = findViewById<Button>(R.id.button1);
-        //Definisat cemo akciju u slucaju klik akcije
-        button.setOnClickListener {
-            showMessage()
-        }
-    }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navView: BottomNavigationView = findViewById(R.id.bottomNavigation)
+        navView.setupWithNavController(navController)
 
-    private fun showMessage() {
-        // Pronaci cemo nas edit text i text view na osnovu id-a
-        val editText = findViewById<EditText>(R.id.editText1)
-        val textView = findViewById<TextView>(R.id.textView1)
-        // Tekst cemo prebaciti u varijablu
-        val message = editText.text.toString()
-        // Postavimo tekst
-        textView.text = message
+        if(intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain")
+        {
+            intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+                val bundle = bundleOf("search" to it)
+                navView.selectedItemId= R.id.searchFragment
+                navController.navigate(R.id.searchFragment,bundle)
+            }
+        }
+
+        Intent(this, LatestMovieService::class.java).also {
+            startForegroundService(it)
+            return
+        }
     }
 }
